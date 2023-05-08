@@ -2,8 +2,11 @@ package CabBooking;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import javax.swing.*;
 import java.sql.*;
+import java.util.Properties;
 
 public class Home extends JFrame implements ActionListener {
 
@@ -39,27 +42,44 @@ public class Home extends JFrame implements ActionListener {
         JMenu bill = new JMenu("Ride Information");
         JMenuItem billMenu = new JMenuItem("Total Bill");
         
-        JMenu LogOut = new JMenu("End Session");
-        JMenuItem exit = new JMenuItem("Exit");
-        JMenuItem LogOutBtn = new JMenuItem("Log Out");
+        JMenu account = new JMenu("Account");
+        JMenuItem logOutBtn = new JMenuItem("Log out");
+        JMenuItem logInBtn = new JMenuItem("Log In");
         
-
-        
-
         BookRide.add(brItem);
         BookRide.add(brItem2);
+        account.add(logOutBtn);
+        account.add(logInBtn);
+
 
         transport.add(transMenu);
         bill.add(billMenu);
         
-        LogOut.add(exit);
-        LogOut.add(LogOutBtn);
+        
+        try (FileInputStream input = new FileInputStream("//home//zyammaqsood//NetBeansProjects//GoRider//src//CabBooking//user.properties")) {
+                        Properties prop = new Properties();
+                        prop.load(input);
+                        String flag = "true";
+                        String loginFlag = prop.getProperty("isLoggedIn");
+                        System.out.println(loginFlag);
+//                        if(loginFlag == flag){
+//                            System.out.println("True");
+//                        } else if(loginFlag == "false"){
+//                            System.out.println("True");
+//
+//
+//                        }
 
-
+                       
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+        
+        
         menuBar.add(BookRide);
         menuBar.add(transport);
         menuBar.add(bill);
-        menuBar.add(LogOut);
+        menuBar.add(account);
 
         panel = new JPanel(new BorderLayout());
         panel.add(menuBar, BorderLayout.NORTH);
@@ -69,17 +89,16 @@ public class Home extends JFrame implements ActionListener {
         imgl.setBounds(0, 0, 1366, 700);
         ImageIcon icon = new ImageIcon("C:\\Users\\hp\\Desktop\\CabBookingApp\\src\\CabBooking\\img\\favicon.png");
         setIconImage(icon.getImage());
-        
-        
-        exit.addActionListener(this);
-        LogOutBtn.addActionListener(this);
+               
+
+        logOutBtn.addActionListener(this);
+        logInBtn.addActionListener(this);
         billMenu.addActionListener(this);
         transMenu.addActionListener(this);
         brItem2.addActionListener(this);
         brItem.addActionListener(this);
-
-
     }
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {

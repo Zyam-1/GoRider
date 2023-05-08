@@ -20,25 +20,7 @@ public class Login extends javax.swing.JFrame implements ActionListener {
     JLabel unamel, passl, title;
     
     Login(){
-        
-        try {
-            FileInputStream input = new FileInputStream("/home/zyammaqsood/NetBeansProjects/GoRider/src/CabBooking/user.properties");
-            Properties prop = new Properties();
-            prop.load(input);
-            
-            if(prop.getProperty("isLoggedIn") == "true"){
-                
-                new Home();
-                
-            } 
-            
-        } catch (Exception ex) {
-                ex.printStackTrace();
-        }
-        
-        
-
-        
+  
         frame = new JFrame("Login");
         frame.setBackground(Color.WHITE);
         frame.setLayout(null);
